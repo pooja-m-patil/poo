@@ -54,7 +54,6 @@ export class DeviceDiscoveryComponent implements OnInit {
       //     }
       //   }
       // }
-
       // for(let i=0;i<this.stockQuote.length;i++){
       //   if(id==this.stockQuote[i]){
       //     for(let j=i;j<this.stockQuote.length-1;j++){
@@ -113,14 +112,10 @@ export class DeviceDiscoveryComponent implements OnInit {
   ngOnInit() {
    
   //   this.getDevices();
-
   //  this.interval = setInterval(()=>{
   //    console.log("printing from ngOnInit");
-
   //    this.getDevices();
-
   // },5000);
-
   if(this.stockQuote.length==0){
     console.log("no dev");
     this.msg="No devices available";
