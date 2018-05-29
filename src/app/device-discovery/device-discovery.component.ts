@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { DataService } from '../data.service';
 import { UserService } from '../user.service';
+import { Quote } from '@angular/compiler';
 
 @Component({
   selector: 'app-device-discovery',
@@ -14,7 +15,7 @@ import { UserService } from '../user.service';
 export class DeviceDiscoveryComponent implements OnInit {
 
   wsdata=[];
-  stockQuote=[];
+  remoteDevices=[];
   sub: Subscription;
   isAdded:boolean=false;
   temp:any
@@ -26,7 +27,7 @@ export class DeviceDiscoveryComponent implements OnInit {
   
 
   constructor(private http:Http,private dataService: DataService,private user:UserService) {
-    this.stockQuote=[];
+    this.remoteDevices=[];
     
    }
 
@@ -70,10 +71,10 @@ export class DeviceDiscoveryComponent implements OnInit {
 
   getDevices=function(){
 
-    if(this.stockQuote.length==0){
+    if(this.remoteDevices.length==0){
       console.log("no dev");
       this.msg="No devices available";
-      this.stockQuote=[];
+      this.remoteDevices=[];
     }
     
     this.sub = this.dataService.getQuotes()
@@ -81,45 +82,16 @@ export class DeviceDiscoveryComponent implements OnInit {
       console.log(quote);
       this.flag=0;
       this.showdiv=true;
-    //   //console.log(this.stockQuote.length);
-    //  if(quote.event=='stop'){
-    //    console.log("Remove from array");
-    //    for(let i=0;i<this.stockQuote.length;i++)
-    //   {
-    //     if(quote.devId==this.stockQuote[i]){
-    //       this.stockQuote.splice(i);
-    //     }
-    //   }
-    //  }
-      for(let i=0;i<this.stockQuote.length;i++)
-      {
-        if(quote==this.stockQuote[i]){
-          this.flag=this.flag+1;
-        }
-      }
-      console.log(this.flag);
-      if(this.flag==0){
-       this.stockQuote.push(quote);
-       this.user.setCount();
-       this.user.settingCount();
-       console.log(this.user.getCount());
-       console.log(this.user.returnCount());
-      }
+  
     })
-      console.log(this.stockQuote);
+      console.log(this.remoteDevices);
   }
 
   ngOnInit() {
    
-  //   this.getDevices();
-  //  this.interval = setInterval(()=>{
-  //    console.log("printing from ngOnInit");
-  //    this.getDevices();
-  // },5000);
-  if(this.stockQuote.length==0){
+  if(this.remoteDevices.length==0){
     console.log("no dev");
     this.msg="No devices available";
-    this.stockQuote=[];
   }
   
   this.sub = this.dataService.getQuotes()
@@ -127,33 +99,9 @@ export class DeviceDiscoveryComponent implements OnInit {
     console.log(quote);
     this.flag=0;
     this.showdiv=true;
-  //   //console.log(this.stockQuote.length);
-  //  if(quote.event=='stop'){
-  //    console.log("Remove from array");
-  //    for(let i=0;i<this.stockQuote.length;i++)
-  //   {
-  //     if(quote.devId==this.stockQuote[i]){
-  //       this.stockQuote.splice(i);
-  //     }
-  //   }
-  //  }
-    for(let i=0;i<this.stockQuote.length;i++)
-    {
-      if(quote==this.stockQuote[i]){
-        this.flag=this.flag+1;
-      }
-    }
-    console.log(this.flag);
-    if(this.flag==0){
-     this.stockQuote.push(quote);
-     this.user.setCount();
-     this.user.settingCount();
-     console.log(this.user.getCount());
-     console.log(this.user.returnCount());
-    }
+   this.remoteDevices=quote.slice(0);
   })
-    console.log(this.stockQuote);
-
+    console.log(this.remoteDevices);
   }
 
   ngOnDestroy() {

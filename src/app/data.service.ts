@@ -19,6 +19,7 @@ export class DataService {
   getQuotes() : Observable<any> {
     
   this.socket.on('message', (res) => {
+    console.log(res);
         this.observer.next(res);
   });
 
@@ -29,9 +30,7 @@ export class DataService {
   });
   }
 
-  // createObservable() : Observable<any> {
-      
-  // }
+  
   private handleError(error) {
     console.error('server error:', error);
     if (error.error instanceof Error) {
