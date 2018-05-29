@@ -24,60 +24,39 @@ export class DeviceDiscoveryComponent implements OnInit {
   interval: any;
   msg:string;
   showdiv:boolean=false;
-  
 
   constructor(private http:Http,private dataService: DataService,private user:UserService) {
-    this.remoteDevices=[];
-    
+    //this.remoteDevices=[];
    }
 
-  discdevice=function(id){
-    console.log("hello");
-    this.productObj={
-    "devicename":id
+  discdevice=function(id)
+  {
+    this.productObj=
+    {
+      "devicename":id
     }
-    console.log(id);
-    this.http.post("http://localhost:3000/display/add",this.productObj).subscribe((res:Response) => {
-    
-    console.log(res);
-    this.temp=res['_body'];
-    console.log(this.temp);
-    this.isAdded=true;
-    this.obj={
-      "added":this.temp,
-      "id":id
-    }
-     this.http.post("http://localhost:3000/remoteApp",this.obj).subscribe((res:Response) => {
-      // for(let i=0;i<this.stockQuote.length;i++){
-      //   if(id==this.stockQuote[i]){
-      //     for(let j=i;j<this.stockQuote.length;j++){
-      //       this.stockQuote[i]=this.stockQuote[i+1];
-      //     }
-      //   }
-      // }
-      // for(let i=0;i<this.stockQuote.length;i++){
-      //   if(id==this.stockQuote[i]){
-      //     for(let j=i;j<this.stockQuote.length-1;j++){
-      //            this.stockQuote[j]=this.stockQuote[j+1];
-      //            this.stockQuote[j+1]="";
-      //       }
-      //   }
-      // }
-     
+    this.http.post("http://localhost:3000/display/add",this.productObj).subscribe((res:Response) => 
+    {
+      this.temp=res['_body'];
+      this.isAdded=true;
+      this.obj=
+      {
+        "added":this.temp,
+        "id":id
+      }
+      this.http.post("http://localhost:3000/remoteApp",this.obj).subscribe((res:Response) => {
+      })
     })
-     })
-    
   }
 
-  getDevices=function(){
-
-    if(this.remoteDevices.length==0){
+  getDevices=function()
+  {
+    if(this.remoteDevices.length==0)
+    {
       console.log("no dev");
       this.msg="No devices available";
-      this.remoteDevices=[];
     }
-    
-    this.sub = this.dataService.getQuotes()
+    this.dataService.getQuotes()
     .subscribe(quote => {
       console.log(quote);
       this.flag=0;
@@ -89,6 +68,13 @@ export class DeviceDiscoveryComponent implements OnInit {
 
   ngOnInit() {
    
+  this.http.get("http://localhost:3000/initarray").subscribe((res:Response) => {
+    console.log(res);
+    //var temp=res.json();
+    //console.log(temp);
+    //this.remoteDevices=res
+  })
+
   if(this.remoteDevices.length==0){
     console.log("no dev");
     this.msg="No devices available";
@@ -105,7 +91,7 @@ export class DeviceDiscoveryComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    clearInterval(this.interval);
+    //clearInterval(this.interval);
     this.user.resetCount();
     //this.sub.unsubscribe();
   }

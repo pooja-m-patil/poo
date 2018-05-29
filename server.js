@@ -1,5 +1,3 @@
-//import { findIndex } from "rxjs/operator/findIndex";
-
 var express = require("express");
 var app = express();
 var cfenv = require("cfenv");
@@ -8,9 +6,6 @@ var request = require("request");
 var express1 = require('express-validation');
 var router = express.Router();
 
-
-
-//var server = require('./server.js');
 var route = require('./route');
 var socketIo = require('socket.io');
 var disc = require('./discovery');
@@ -20,21 +15,14 @@ var auth;
 var deviceId;
 var temp;
 var socket1;
-
+var initArray=[];
 
 var server = app.listen(3000, function () {
   console.log("Listening on port:3000");
 });
 
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-
-app.use(express.static(__dirname + '/dist'));
-
-
-app.use(express.static(__dirname + '/views'));
-
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -43,8 +31,6 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
-
-
 
 app.use('/display', route);
 
@@ -60,7 +46,8 @@ devicesObj = {
     return this.devArray.map(device => device.uid);
   },
   emit: function () {
-    socket1.emit("message", this.pick());
+    initArray=this.devArray.slice(0);
+    socket1.emit("Available devices", this.pick());
   },
   setTimer: function (uid) {
     return setTimeout(() => {
@@ -74,6 +61,8 @@ devicesObj = {
     this.devArray[this.find(uid)].timer = this.setTimer(uid);
   },
   add: function (uid) {
+    console.log("uid"+uid);
+    
     if (this.find(uid) === -1) {  // Device not available
       device = {
         uid,
@@ -86,7 +75,6 @@ devicesObj = {
     }
   }
 }
-
 
 var io = socketIo(server);
 
@@ -110,42 +98,43 @@ app.post("/remoteApp", function (req, res) {
 
   if(status) 
   {
-    console.log(status);
-    console.log(temp);
-    console.log(deviceId);
-    if (temp == deviceId) {
-
+    if (temp == deviceId) 
+    {
       res.send(auth);
     }
-    else {
+    else 
+    {
       res.send("");
     }
   }
   else 
   {
-    var dId = req.body.deviceId;
-    dev.devices(dId, function (data) 
+    var uid = req.body.deviceId;
+    dev.devices(uid, function (data) 
     {
-    
       if (data.bookmark != 'nil') 
       {
-        if (data.bookmark == undefined) {
+        if (data.bookmark == undefined) 
+        {
           res.send("");
           return;
         }
-        else {
-          console.log(dId);
-
-          devicesObj.add(dId);
+        else 
+        {
+          devicesObj.add(uid);
         }
       }
       else 
       {
-        res.send("Not valid");
+        res.send("Not valid device");
         return;
       }
     });
   }
+})
+
+app.get("/initarray", function (req, res) {
+  res.send(devicesObj.emit());
 })
 
 module.exports = app;
