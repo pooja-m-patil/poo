@@ -1,83 +1,67 @@
 <div id="fullPage">
-  <app-header></app-header>
-  <!-- <div *ngIf="tologin">
-    <app-login-form></app-login-form>
-  </div> -->
-  <!-- <app-login-form></app-login-form> -->
+<app-header></app-header>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-UU2jkdv1M9UEjLje/kygVxqMBq9Jrg9z+Gqvw972H6BqKTzDvLaRJfK7PnzLM4SI" crossorigin="anonymous">
-<script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
-  <script type="text/javascript">
-    var host = "startbootstrap.com";
-    if ((host == window.location.host) && (window.location.protocol != "https:"))
-      window.location.protocol = "https";
-  </script>
-  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-UU2jkdv1M9UEjLje/kygVxqMBq9Jrg9z+Gqvw972H6BqKTzDvLaRJfK7PnzLM4SI" crossorigin="anonymous">
 
-  <div *ngIf="user.getLog()=='navbar'">
-    <div>Welcome {{user.getWelcome()}}</div>
-  <!-- <div *ngIf="welmsg"> -->
-  <!-- <app-login-form (messageEvent)="recieveMessage($event)" class="ng-hide"></app-login-form> -->
-<!-- </div> -->
-  <!-- <div>{{model.message}}</div> -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div *ngIf="user.getLog()=='admin'">
+  <div>Welcome {{user.getWelcome()}}</div>
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="a" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   
-    <div class="collapse navbar-collapse" id="a">
+    <div class="topnav" id="myTopnav" style="width:100%">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard">Home <span class="sr-only">(current)</span></a>
+        <li>
+          <a class="current" routerLink="/dashboard">Home</a>
         </li>
-        <div *ngIf="user.getHideFetch()">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/features']">Features</a>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        
+        <li>
+          <div>
+            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select">
+              <option value="" disabled selected>Devices</option>
+              <option  value='fetchdata'>Device List</option>
+              <option  value='devicediscovery'>Discover Devices</option>
+            </select>
+          </div>  
         </li>
-      </div>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/fetchdata">Devices</a>
+
+        <li>
+            <a routerLink="/devicetype">Connection Request</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/devicetype">Add New Device Type</a>
+
+        <li>
+            <a routerLink="/devicetype">Add New Device Type</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/add-device">Add New Device</a>
+
+        <li>
+          <a routerLink="/add-device">Add New Device</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/graph">Show Graph</a>
+
+        <li>
+          <a routerLink="/graph">Show Graph</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/devicediscovery">Device Discovery</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/discoverdevices">Discover Devices</a>
-        </li> -->
-       </ul>
-       <table border=1 *ngIf="user.returnCount()==true">
+      
+        <table border=1 *ngIf="user.returnCount()==true">
          <tr>
            <td background-color="white">
               <font color="white">Available Devices: {{user.getCount()}}</font>
            </td>
          </tr>
-       </table>
-       &nbsp;
-       &nbsp;
-       &nbsp;
-       &nbsp;
-      <!-- <form class="form-inline my-2 my-lg-0" ng-submit="user.logout()"> -->
-        <!-- <a class="nav-link" href="/">Logout</a> -->
-        <!-- <button (click)="user.logout()" ng-href="/">Logout</button> -->
-        <a href="/" (click)="user.logout()">Logout</a>
-      <!-- </form> -->
+        </table>
+      
+        <div class="right">
+          <a href="/" (click)="user.logout()">Logout</a>
+        </div>
+      </ul>
+        
     </div>
   </nav>
-  <br>
-  
-    
-
+  <br>  
 </div>
-
 
 <router-outlet></router-outlet>

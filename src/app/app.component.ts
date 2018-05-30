@@ -15,39 +15,40 @@ export class AppComponent implements OnInit,OnDestroy{
   arraymsg=[];
   public model=new Model();
   username="codedamn";
-
+  
   stockQuote:number;
   sub: Subscription;
 
-  constructor(private http: Http,private router:Router,private user:UserService) {
-
+  constructor(private http: Http,private router:Router,private user:UserService) 
+  {
+   
     this.model.isFetch=false;
-
   }
-  
  
-  changeUsername(ev){
-    
+  changeUsername(ev)
+  {
     this.username=ev.target.value;
   }
 
-  // fetchData=function(){
-  //   console.log("uname "+this.model.username);
-  //   this.http.get("http://localhost:3000/display").subscribe(res=>{
-  //     this.model.isFetch=true;
-  //     this.model.devices=res.json();
-  //     console.log(this.devices);
-  //     //return this.devices;
-  //   });
-  // }
-
   graph=function(){
+   
     this.router.navigate(['graph']);
   }
-  
+
+  Navigate(value)
+  {
+    console.log(value);
+    if(value=='fetchdata'){
+      this.router.navigate(['fetchdata']);
+    }
+    else if(value=='devicediscovery')
+    {
+      this.router.navigate(['devicediscovery']);
+    }
+  }
   
   ngOnInit() {
-   //this.user.getCount();
+   this.user.getCount();
   }
   ngOnDestroy() {
    

@@ -29,9 +29,9 @@ export class UserService {
      
    }
 
-   setLog() {
+   setLog(uname) {
     //this.isUserLoggedIn=true;
-    localStorage.setItem(this.key, 'navbar');
+    localStorage.setItem(this.key, uname);
   }
 
   getLog() {
