@@ -32,6 +32,7 @@ export class LoginFormComponent implements OnInit {
     }
 
     if(this.model.uname=="admin"){
+      this.user.setWelcome(this.loginObj.username);
       this.user.setLog(this.model.uname);
       this.router.navigate(['dashboard']);
     }

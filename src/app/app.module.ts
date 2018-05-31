@@ -23,6 +23,9 @@ import { DataService } from './data.service';
 import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import { DevicetypeComponent } from './devicetype/devicetype.component';
 import { SignupComponent } from './signup/signup.component';
+import { ConnectionRequestComponent } from './connection-request/connection-request.component';
+import { ConnectedDevicesComponent } from './connected-devices/connected-devices.component';
+import { RequestedConnectionComponent } from './requested-connection/requested-connection.component';
 
 
 //import {AppRoutingModule} from './app-routing.module';
@@ -78,6 +81,14 @@ const appRoutes:Routes=[
   path:'devicetype',
   //canActivate:[AuthguardGuard],
   component:DevicetypeComponent
+},
+{
+  path:'reqconnection',
+  component:ConnectionRequestComponent
+},
+{
+  path:'requested_conn',
+  component:RequestedConnectionComponent
 }
 
 ]
@@ -99,6 +110,9 @@ const appRoutes:Routes=[
     DeviceDiscoveryComponent,
     DevicetypeComponent,
     SignupComponent,
+    ConnectionRequestComponent,
+    ConnectedDevicesComponent,
+    RequestedConnectionComponent,
     
   ],
   imports: [

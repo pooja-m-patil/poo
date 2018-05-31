@@ -19,7 +19,16 @@
         &nbsp;
         &nbsp;
         &nbsp;
-        
+        <li>
+          <a routerLink="/features">Features</a>
+        </li>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
         <li>
           <div>
             <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select">
@@ -31,7 +40,7 @@
         </li>
 
         <li>
-            <a routerLink="/devicetype">Connection Request</a>
+            <a routerLink="/requested_conn">Connection Request</a>
         </li>
 
         <li>
@@ -45,6 +54,8 @@
         <li>
           <a routerLink="/graph">Show Graph</a>
         </li>
+
+       
       
         <table border=1 *ngIf="user.returnCount()==true">
          <tr>
@@ -53,6 +64,57 @@
            </td>
          </tr>
         </table>
+      
+        <div class="right">
+          <a href="/" (click)="user.logout()">Logout</a>
+        </div>
+      </ul>
+        
+    </div>
+  </nav>
+  <br>  
+</div>
+
+
+<div *ngIf="user.getLog()=='x'">
+  <div>Welcome {{user.getWelcome()}}</div>
+    
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+    <div class="topnav" id="myTopnav" style="width:100%">
+      <ul class="navbar-nav mr-auto">
+        <li>
+          <a class="current" routerLink="/dashboard">Home</a>
+        </li>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        
+        <li>
+          <div>
+            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select">
+              <option value="" disabled selected>Devices</option>
+              <option  value='fetchdata'>Device List</option>
+              <option  value='devicediscovery'>Discover Devices</option>
+            </select>
+          </div>  
+        </li>
+
+        <li>
+          <a routerLink="/connecteddevices">Connections</a>
+        </li>
+
+        <li>
+          <a routerLink="/reqconnection">Connection Request</a>
+        </li>
+
+        <li>
+          <a routerLink="/graph">Show Graph</a>
+        </li>
       
         <div class="right">
           <a href="/" (click)="user.logout()">Logout</a>

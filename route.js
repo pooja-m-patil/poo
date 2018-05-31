@@ -109,10 +109,6 @@ app.post("/add", function (request, response) {
     
     var devicename=request.body.devicename;
     
-    
-    //found=devicename.match(/[a-z]{1,7}/);
-    //if(found)
-    //{
       server.addDevice(devicename,function(data){
         console.log(data.authToken);
         var deviceId=data.deviceId;
@@ -127,14 +123,9 @@ app.post("/add", function (request, response) {
         else{
           response.send("");
         }
-    //response.send("response");
   });
-  //}
-  //else
-  //{
-    //response.send("Error!! Please Enter valid name");
-  //}
 });
+
 
 
 app.post("/adddev", function (request, response) {

@@ -7,6 +7,8 @@ var express1 = require('express-validation');
 var router = express.Router();
 
 var route = require('./route');
+var user = require('./user');
+var admin = require('./admin');
 var socketIo = require('socket.io');
 var disc = require('./discovery');
 var dev = require('./devices');
@@ -33,6 +35,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/display', route);
+app.use('/display', user);
+app.use('/display', admin);
 
 devicesObj = {
   devArray: [],
