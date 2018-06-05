@@ -26,6 +26,11 @@ import { SignupComponent } from './signup/signup.component';
 import { ConnectionRequestComponent } from './connection-request/connection-request.component';
 import { ConnectedDevicesComponent } from './connected-devices/connected-devices.component';
 import { RequestedConnectionComponent } from './requested-connection/requested-connection.component';
+import { AgmCoreModule } from '@agm/core';
+import { MappingDevicesComponent } from './mapping-devices/mapping-devices.component';
+//import {GoogleMapsAPIWrapper} from "angular2-google-maps/core/services/google-maps-api-wrapper"
+//import {MapsAPILoader} from '@agm/core';
+
 
 
 //import {AppRoutingModule} from './app-routing.module';
@@ -89,6 +94,10 @@ const appRoutes:Routes=[
 {
   path:'requested_conn',
   component:RequestedConnectionComponent
+},
+{
+  path:'mapping-devices',
+  component:MappingDevicesComponent
 }
 
 ]
@@ -113,6 +122,7 @@ const appRoutes:Routes=[
     ConnectionRequestComponent,
     ConnectedDevicesComponent,
     RequestedConnectionComponent,
+    MappingDevicesComponent,
     
   ],
   imports: [
@@ -124,6 +134,9 @@ const appRoutes:Routes=[
     HttpModule,
     ChartsModule,
     LocalStorageModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyBTDyDZ0rmFgml50uuXJdEK0vwMWmn8EqY'
+    }),
     NgMultiSelectDropDownModule.forRoot()
     //AppRoutingModule
   ],

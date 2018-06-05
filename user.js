@@ -13,12 +13,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/reqconn", function (request, response) {
     
     var username=request.body.username;
-    var devicename=request.body.devicename;
-    var classname=request.body.classname;
-    var description=request.body.description;
+    var locationname=request.body.locationname;
+    var latitude=request.body.latitude;
+    var longitude=request.body.longitude;
     console.log('user req');
 
-    req.reqDevice(username,devicename,classname,description,function(data){
+    req.reqDevice(username,locationname,latitude,longitude,function(data){
 
     response.send(data);
   });

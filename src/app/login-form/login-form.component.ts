@@ -15,7 +15,7 @@ export class LoginFormComponent implements OnInit {
   public model=new Model();
   loginObj:object={};
   
-  constructor(private router:Router, private user:UserService,private http: Http) { }
+  constructor(private router:Router ,private http: Http, private user:UserService) { }
 
   ngOnInit() {
    //this.model.welcome=false;

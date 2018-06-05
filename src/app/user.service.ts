@@ -10,6 +10,11 @@ export class UserService {
   private key='';
   private count;
   private showCount=false;
+  public uname='';
+  private lname='';
+  private lat='';
+  private lng='';
+  private mapObj=[];
 
   constructor(private router:Router) {
     this.isUserLoggedIn=false;
@@ -77,6 +82,15 @@ export class UserService {
 
   settingCount(){
   this.showCount=true;
+}
+
+setMapping(obj){
+  this.mapObj=obj;
+}
+
+getMapping(){
+  return this.mapObj;
+
 }
 
 returnCount(){

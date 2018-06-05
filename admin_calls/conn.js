@@ -10,7 +10,7 @@ exports.getConnections=function(callback){
         'content-type': 'application/json' },
     body: 
     {   selector: { _id: { '$gt': '0' } },
-        fields: [ 'username', '_id', 'classname', 'description' ],
+        fields: [ 'username', 'locationname','latitude','longitude' ],
         sort: [ { _id: 'asc' } ] },
         json: true };
 

@@ -1,0 +1,33 @@
+<div aria-colspan="40%">
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col" colspan="40%">Device Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-active" *ngFor="let device of iotDevices; let i=index;">
+            <td colspan="40%">{{device}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <input type="text" />
+  <agm-map [latitude]="latitude" [longitude]="longitude" id="cname" name="locationcoords">
+      <a (click) = "connectDevice()">
+        <agm-marker [latitude]="latitude" [longitude]="longitude">
+        </agm-marker>
+      </a>
+      <input id="deviceID"  style="background-color: blue" #textInput (input)="myFunction(textInput.value)">
+      <h3>{{value}}</h3>
+  </agm-map>
+
+ <a (click)="connectDevice()">Connect</a>
+
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<a href="adfsg45yr">adfsg45yr</a>
+<input id="deviceID"  #textInput (input)="myFunction(textInput.value)">
+<h3>{{value}}</h3>

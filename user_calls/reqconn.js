@@ -1,6 +1,5 @@
-exports.reqDevice=function(username, devicename,classname,description,callback)
+exports.reqDevice=function(username, locationname,latitude,longitude,callback)
 {
-    console.log(devicename+" "+classname+" "+description);
     var request = require("request");
 
     var options = { method: 'POST',
@@ -10,7 +9,7 @@ exports.reqDevice=function(username, devicename,classname,description,callback)
      'cache-control': 'no-cache',
      authorization: 'Basic NzIyZmE3YjgtMGM0MS00ZDU5LWFjOGMtMWMwMmQyNWVhZWY1LWJsdWVtaXg6YjdkZGQyOGJmNzU1ODk1Nzg4NjA3NDU3YmRmMjgyZGJmNzJkY2EzMTg3YzA1ZDIwMTZjYjAzNGU5MDI1MDFhNw==',
      'content-type': 'application/json' },
-    body: { username:username, _id: devicename, classname: classname, description: description },
+    body: { username:username, locationname: locationname, latitude: latitude, longitude: longitude },
     json: true };
 
     request(options, function (error, response, body) {

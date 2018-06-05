@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-requested-connection',
@@ -9,36 +11,42 @@ import { Http, Response, Headers } from '@angular/http';
 export class RequestedConnectionComponent implements OnInit {
 
   connRequests=[];
-  deviceObj:object;
+  deviceObj=[];
   auth:string;
   hideAddedDevice:any;
+  deviceId:string;
 
-  constructor(private http: Http) { 
+  constructor(private http: Http,private router:Router,private user:UserService) { 
 
   }
 
-  addDevice=function(id,classname,description){
-    this.deviceObj={
-      "id":id,
-      "classname":classname,
-      "description":description
-    }
+  addDevice=function(index,username,locationname,latitude,longitude){
     
-    this.http.post("http://localhost:3000/display/addReq",this.deviceObj).subscribe((res:Response) => 
-    {
-      console.log(temp);
-      var temp=res['_body'];
-      console.log(temp);
-      this.auth=temp;
-      this.hideAddedDevice=id;
-      console.log(this.hideAddedDevice);
-      for(let i=0;i<this.connRequests.length;i++){
-        console.log(this.connRequests[i]._id);
-        if(this.hideAddedDevice==this.connRequests[i]._id){
-          this.connRequests.splice(i);
-        }
-      }
-    })
+    console.log(username);
+    console.log(locationname);
+    console.log(latitude);
+    console.log(longitude);
+    
+    this.deviceObj=[
+      {"username":username},{"locationname":locationname},{"latitude":latitude},{"longitude":longitude}
+    ];
+    this.user.setMapping(this.deviceObj);
+    this.router.navigate(['mapping-devices']);
+  //   this.http.post("http://localhost:3000/display/addReq",this.deviceObj).subscribe((res:Response) => 
+  //   {
+  //     console.log(res.json());
+  //     var temp=res.json();
+  //     console.log(temp.results[0].deviceId);
+  //     this.auth=temp;
+  //     this.hideAddedDevice=index;
+  //     console.log(this.hideAddedDevice);
+  //     for(let i=0;i<this.connRequests.length;i++){
+  //       console.log(this.connRequests[i]._id);
+  //       if(this.hideAddedDevice==this.connRequests[i]._id){
+  //         this.connRequests.splice(i);
+  //       }
+  //     }
+  //   })
   }
 
   ngOnInit() {
