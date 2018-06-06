@@ -112,18 +112,19 @@ app.post("/add", function (request, response) {
       server.addDevice(devicename,function(data){
         console.log(data.authToken);
         var deviceId=data.deviceId;
-        // mydbiot.insert(data,deviceId, function(err) {
-        //   if (err) {
-        //     return console.log('[mydbiot.insert]', err.message);
-        //   }
-       //});
+        console.log(data);
+
+        server.addToDb(devicename,data,function(data){
+          console.log(data);
+        })
+
        if(data.authToken){
-    response.send(data.authToken);
+          response.send(data.authToken);
         }
         else{
           response.send("");
         }
-  });
+      });
 });
 
 

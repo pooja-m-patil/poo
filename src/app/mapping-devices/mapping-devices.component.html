@@ -1,33 +1,23 @@
-<div aria-colspan="40%">
-
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" colspan="40%">Device Id</th>
+<h2 style="text-align:center; color:green">{{msg}}</h2>
+<div>
+<div class="col-sm-3" style="top: 0.6cm">
+    <table class="table table-hover" align="left" border=1>
+          <th style="background-color: lightslategrey; color: white">Device Id</th>
+          <tr *ngFor="let device of displayDevices; let i=index;">
+            <td><a href={{device}}>{{device}}</a></td>
           </tr>
-        </thead>
-        <tbody>
-          <tr class="table-active" *ngFor="let device of iotDevices; let i=index;">
-            <td colspan="40%">{{device}}</td>
-          </tr>
-        </tbody>
-      </table>
+    </table>
   </div>
-  <input type="text" />
-  <agm-map [latitude]="latitude" [longitude]="longitude" id="cname" name="locationcoords">
-      <a (click) = "connectDevice()">
+  &nbsp;
+  
+  
+  <agm-map id="map1" [latitude]="latitude" [longitude]="longitude" id="cname" name="locationcoords">
         <agm-marker [latitude]="latitude" [longitude]="longitude">
+          <agm-info-window>
+            <input #textInput (input)="myFunction(textInput.value)" value={{value}}>
+            <input type="submit" value="Confirm" (click)="connectDevice(textInput.value)">
+          </agm-info-window>
         </agm-marker>
-      </a>
-      <input id="deviceID"  style="background-color: blue" #textInput (input)="myFunction(textInput.value)">
-      <h3>{{value}}</h3>
   </agm-map>
-
- <a (click)="connectDevice()">Connect</a>
-
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-<a href="adfsg45yr">adfsg45yr</a>
-<input id="deviceID"  #textInput (input)="myFunction(textInput.value)">
-<h3>{{value}}</h3>
+</div>
+  

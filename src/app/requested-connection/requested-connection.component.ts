@@ -15,6 +15,8 @@ export class RequestedConnectionComponent implements OnInit {
   auth:string;
   hideAddedDevice:any;
   deviceId:string;
+  userRegDevices=[];
+  displayDevices=[];
 
   constructor(private http: Http,private router:Router,private user:UserService) { 
 
@@ -57,7 +59,6 @@ export class RequestedConnectionComponent implements OnInit {
       console.log(temp.docs);
       this.connRequests=temp.docs;
       console.log(this.hideAddedDevice);
-      
       
       console.log(this.connRequests);
   })

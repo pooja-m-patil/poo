@@ -18,20 +18,19 @@
   color: white;
 }
 
-.active{
-  background-color:#A60500;
-}
-
 .topnav .icon {
   display: none;
 }
 
-.topnav a:hover, select option:hover {
-  background-color: blue;
-  color: orange;
+.topnav a:hover, select:hover {
+  background-color: royalblue;
 }
 
-@media screen and (max-width: 600px) {
+.topnav a:focus {
+  background-color: green;
+}
+
+/* @media screen and (max-width: 600px) {
   .topnav a:not(:first-child), .dropdown .dropbtn {
     display: none;
   }
@@ -39,11 +38,9 @@
     float: right;
     display: block;
   }
-}
+} */
 
-#container a{
-	text-align: right;
-}
+
 
 select{
   -webkit-appearance: none;

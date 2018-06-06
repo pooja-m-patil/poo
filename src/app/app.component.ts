@@ -46,6 +46,18 @@ export class AppComponent implements OnInit,OnDestroy{
       this.router.navigate(['devicediscovery']);
     }
   }
+
+  adminSelect(val){
+    if(val=='logout')
+    {
+      this.user.logout();
+      this.router.navigate(['/']);
+    }
+    else if(val=='home')
+    {
+      this.router.navigate(['dashboard']);
+    }
+  }
   
   ngOnInit() {
    this.user.getCount();

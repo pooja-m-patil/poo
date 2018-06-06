@@ -4,19 +4,23 @@ exports.getIOTDevice=function(callback)
 {
   var request = require("request");
 
-  var options = { method: 'GET',
-  url: 'https://tgacg8.internetofthings.ibmcloud.com/api/v0002/device/types/iotbootcamp/devices',
+var options = { method: 'POST',
+  url: 'https://722fa7b8-0c41-4d59-ac8c-1c02d25eaef5-bluemix.cloudant.com/mydbiot/_find',
   headers: 
-   { 'postman-token': '87229583-b621-8b11-cd53-4aa499a36e5f',
+   { 'postman-token': '7beec026-bc00-595f-dbd8-a329aee217d3',
      'cache-control': 'no-cache',
-     'content-type': 'application/json',
-     authorization: 'Basic YS10Z2FjZzgtcDNoZXlmMWMxZzpvRm1jZ1RlaUNCd0BRNCp2aig=' } };
+     authorization: 'Basic NzIyZmE3YjgtMGM0MS00ZDU5LWFjOGMtMWMwMmQyNWVhZWY1LWJsdWVtaXg6YjdkZGQyOGJmNzU1ODk1Nzg4NjA3NDU3YmRmMjgyZGJmNzJkY2EzMTg3YzA1ZDIwMTZjYjAzNGU5MDI1MDFhNw==',
+     'content-type': 'application/json' },
+  body: 
+   { selector: { _id: { '$gt': '0' } },
+     fields: [ '_id', '_rev' ],
+     sort: [ { _id: 'asc' } ] },
+    json: true };
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-      console.log(body);
-      console.log(JSON.parse(body));
-      body=JSON.parse(body);
+      //console.log(body);
       callback(body);
   });
+
 }

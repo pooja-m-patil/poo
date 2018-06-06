@@ -3,48 +3,33 @@
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-UU2jkdv1M9UEjLje/kygVxqMBq9Jrg9z+Gqvw972H6BqKTzDvLaRJfK7PnzLM4SI" crossorigin="anonymous">
 
 <div *ngIf="user.getLog()=='admin'">
-  <div>Welcome {{user.getWelcome()}}</div>
     
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   
-    <div class="topnav" id="myTopnav" style="width:100%">
-      <ul class="navbar-nav mr-auto">
+    <div class="topnav" id="myTopnav" style="width:100%;">
+    <div class="navigation-left" style="float:left">
+      <ul class="navbar-nav mr-auto" id="menu">
         <li>
           <a class="current" routerLink="/dashboard">Home</a>
         </li>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
+ 
         <li>
           <a routerLink="/features">Features</a>
         </li>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
+       
         <li>
           <div>
-            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select">
+            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select" style="width: 2.5cm">
               <option value="" disabled selected>Devices</option>
               <option  value='fetchdata'>Device List</option>
               <option  value='devicediscovery'>Discover Devices</option>
+              <option  value='registeredDevices'>Registered Devices</option>
             </select>
           </div>  
         </li>
 
         <li>
             <a routerLink="/requested_conn">Connection Request</a>
-        </li>
-
-        <li>
-            <a routerLink="/devicetype">Add New Device Type</a>
         </li>
 
         <li>
@@ -64,12 +49,21 @@
            </td>
          </tr>
         </table>
-      
-        <div class="right">
-          <a href="/" (click)="user.logout()">Logout</a>
-        </div>
+
       </ul>
-        
+    </div>
+
+    <div class="navigation-left">
+      <ul style="float:right; white-space:nowrap;">
+        <li>
+          <img src="/assets/images/welcome.png" height="50" width="50">
+          <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
+            <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
+            <option  value='logout' (click)="user.logout()">Logout</option>
+          </select>
+        </li>
+      </ul>
+    </div>
     </div>
   </nav>
   <br>  
@@ -77,26 +71,19 @@
 
 
 <div *ngIf="user.getLog()=='x'">
-  <div>Welcome {{user.getWelcome()}}</div>
     
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   
     <div class="topnav" id="myTopnav" style="width:100%">
+    <div class="navigation-left" style="float:left">
       <ul class="navbar-nav mr-auto">
         <li>
-          <a class="current" routerLink="/dashboard">Home</a>
+            <a class="current" routerLink="/dashboard">Home</a>
         </li>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
         
         <li>
           <div>
-            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select">
+            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select" style="width: 2.5cm">
               <option value="" disabled selected>Devices</option>
               <option  value='fetchdata'>Device List</option>
               <option  value='devicediscovery'>Discover Devices</option>
@@ -115,12 +102,20 @@
         <li>
           <a routerLink="/graph">Show Graph</a>
         </li>
-      
-        <div class="right">
-          <a href="/" (click)="user.logout()">Logout</a>
-        </div>
       </ul>
-        
+      </div>
+
+      <div class="navigation-left">
+          <ul style="float:right; white-space:nowrap;">
+            <li>
+              <img src="/assets/images/welcome.png" height="50" width="50">
+              <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
+                <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
+                <option  value='logout' (click)="user.logout()">Logout</option>
+              </select>
+            </li>
+          </ul>
+        </div>
     </div>
   </nav>
   <br>  
