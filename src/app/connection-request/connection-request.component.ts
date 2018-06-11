@@ -13,6 +13,7 @@ export class ConnectionRequestComponent implements OnInit {
 
   msg:string;
   coordinates:object;
+  rId:number;
 
   constructor(private http: Http,private user:UserService) { 
     this.latitude = 18.5204;
@@ -68,6 +69,7 @@ reqNewDevice=function(e){
   this.longitude=e.path[0].firstElementChild.nextElementSibling.attributes[7].nodeValue;
 
   this.productObj={
+    "rId":this.rId,
     "username":this.user.getWelcome(),
     "locationname":e.path[0][3].value,
     "latitude":this.latitude,
@@ -83,6 +85,7 @@ reqNewDevice=function(e){
     var temp=res['_body'];
     if(temp=='true'){
       this.msg="Request submited successfully";
+      this.rId++;
     }
     else{
       this.msg="Invalid request. Try again";

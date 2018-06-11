@@ -36,6 +36,7 @@ export class LoginFormComponent implements OnInit {
       this.user.setLog(this.model.uname);
       this.router.navigate(['dashboard']);
     }
+    
 
     this.http.post('http://localhost:3000/display/login', this.loginObj)
         .subscribe((res:Response) =>{

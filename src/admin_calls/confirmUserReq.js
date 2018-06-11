@@ -1,7 +1,7 @@
-exports.confirmUserReq=function(username,location,lat,lng,dId,callback)
+exports.confirmUserReq=function(dId,data,username,location,lat,lng,callback)
 {
     console.log(dId);
-    
+
     var request = require("request");
 
     var options = { method: 'POST',
@@ -22,5 +22,6 @@ exports.confirmUserReq=function(username,location,lat,lng,dId,callback)
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
         console.log(body);
+        callback(body);
     });
 }

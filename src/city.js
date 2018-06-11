@@ -1,12 +1,12 @@
 var cfenv = require("cfenv");
 var request = require("request");
-var city;
+var citylist;
 
 
 // load local VCAP configuration  and service credentials
 var vcapLocal;
 try {
-  vcapLocal = require('./vcap-local.json');
+  vcapLocal = require('../vcap-local.json');
   console.log("Loaded local VCAP", vcapLocal);
 } catch (e) { }
 
@@ -37,7 +37,7 @@ if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
   });
 
   // Specify the database we are going to use (mydb)...
-  city = cloudant.db.use(dbName);
+  citylist = cloudant.db.use(dbName);
 }
 
 
@@ -58,7 +58,7 @@ if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
 exports.getData=function(callback)
 {
     console.log("hh");
-  city.list({include_docs:true},function(err, data) {
+    citylist.list({include_docs:true},function(err, data) {
     console.log('Error:', err);
     console.log(data);
     callback(data);

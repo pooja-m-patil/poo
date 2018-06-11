@@ -20,6 +20,5 @@ exports.userConnDevices=function(callback){
   
     console.log(body);
     callback(body);
-  });
-  
+  }); 
 }

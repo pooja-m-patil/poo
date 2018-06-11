@@ -1,7 +1,7 @@
-.topnav {
+/* .topnav {
   overflow: hidden;
   background-color: #333;
-}
+} */
 
 .topnav a {
   float: left;
@@ -53,7 +53,7 @@ select{
   font-size: 17px;
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -72,4 +72,4 @@ select{
     width: 100%;
     text-align: left;
   }
-}
+} */

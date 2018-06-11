@@ -23,8 +23,8 @@ export class SignupComponent implements OnInit {
     'name' : [null, Validators.compose([Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
     'role' : [null, Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]*")])],
     'pwd' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20),Validators.pattern("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")])],
-    'cpwd': ['', [Validators.required]],
-    'type':[null,Validators.required]
+    'cpwd': ['', [Validators.required]]
+
 
       // passwords:fb.group({
       //   'pwd': ['',  Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10),Validators.pattern("((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")])],
@@ -45,13 +45,12 @@ export class SignupComponent implements OnInit {
    var email=e.name;
    var role=e.role;
    var pass1=e.pwd;
-   var type=e.type;
+   
    
     //this.model.pwd=e.target.elements[1].value;
     console.log(email);
     console.log(role);
     console.log(pass1);
-    console.log(type);
    
     
 
@@ -69,7 +68,7 @@ export class SignupComponent implements OnInit {
             this.msg="Account created successfully. You can now login";
           }
           else{
-            this.msg="Account already exists";
+            this.msg="Invalid Entry";
           }
     });
   }

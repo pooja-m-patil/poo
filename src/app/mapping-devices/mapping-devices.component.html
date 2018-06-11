@@ -14,7 +14,7 @@
   <agm-map id="map1" [latitude]="latitude" [longitude]="longitude" id="cname" name="locationcoords">
         <agm-marker [latitude]="latitude" [longitude]="longitude">
           <agm-info-window>
-            <input #textInput (input)="myFunction(textInput.value)" value={{value}}>
+            <input #textInput (input)="myFunction(textInput.value)" value={{value}} placeholder="Drag and drop Device Id">
             <input type="submit" value="Confirm" (click)="connectDevice(textInput.value)">
           </agm-info-window>
         </agm-marker>

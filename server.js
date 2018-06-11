@@ -6,12 +6,12 @@ var request = require("request");
 var express1 = require('express-validation');
 var router = express.Router();
 
-var route = require('./route');
-var user = require('./user');
-var admin = require('./admin');
+var route = require('./src/api_calls/route');
+var user = require('./src/api_calls/user');
+var admin = require('./src/api_calls/admin');
 var socketIo = require('socket.io');
-var disc = require('./discovery');
-var dev = require('./devices');
+
+var dev = require('./src/api_calls/devices');
 var status;
 var auth;
 var deviceId;

@@ -14,9 +14,6 @@
       <input type="text" placeholder="Enter Email" formControlName="name" />
       <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched" style="color:red">Enter your Email</div>
       <br>
-      <!-- <input type="text" placeholder="Role" formControlName="role" />
-      <div class="alert" *ngIf="!rForm.controls['role'].valid && rForm.controls['role'].touched" style="color:red">Role should be a string</div> -->
-      <!-- <br> -->
       <input type="password" placeholder="Password" formControlName="pwd" />
       <div class="alert" *ngIf="!rForm.controls['pwd'].valid && rForm.controls['pwd'].touched" style="color:red">Should contain atleast one Capital and small alphabet,Numerical,Special symbol. Length should be between 6 to 20</div>
       <br>
@@ -24,13 +21,8 @@
       <div style='color:#ff7355' *ngIf="rForm.get('pwd').value != rForm.get('cpwd').value && rForm.get('cpwd').value != ''">
           Password does not match</div>
       <br>
-      <div>
-        <select formControlName="type" ngModel>
-          <option value="" disabled selected>SELECT ROLE</option>
-          <option *ngFor="let role of roles; let i=index" value={{role}}>{{role}}</option>
-        </select>
-      </div>
-      <input class="btn btn-success" type="submit" [disabled]="!rForm.valid" value="Create Account" >  &nbsp;  or <a class="btn" href="/">Login</a>
+    
+      <input class="btn btn-success" type="submit" value="Create Account" >  &nbsp;  or <a class="btn" href="/">Login</a>
     </div>
   </div>
   </div>

@@ -46,7 +46,7 @@ if (appEnv.services['cloudantNoSQLDB'] || appEnv.getService(/cloudant/)) {
 
 
 
-exports.registerUser=function(uname,role,pass,callback)
+exports.registerUser=function(uname,pass,callback)
 {
   // /found=devicename.match(/[a-z]{1,7}/);
   //   ///if(found)
@@ -68,7 +68,7 @@ exports.registerUser=function(uname,role,pass,callback)
      'cache-control': 'no-cache',
      'content-type': 'application/json',
      authorization: 'Basic NzIyZmE3YjgtMGM0MS00ZDU5LWFjOGMtMWMwMmQyNWVhZWY1LWJsdWVtaXg6YjdkZGQyOGJmNzU1ODk1Nzg4NjA3NDU3YmRmMjgyZGJmNzJkY2EzMTg3YzA1ZDIwMTZjYjAzNGU5MDI1MDFhNw==' },
-  body: { _id: uname, Role: role, Password: hash },
+  body: { _id: uname, Password: hash },
   json: true };
 
   request(options, function (error, response, body) {

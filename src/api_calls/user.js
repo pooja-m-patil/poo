@@ -3,7 +3,7 @@ var app = express();
 var cfenv = require("cfenv");
 var request = require("request");
 var bodyParser = require('body-parser');
-var req=require('./user_calls/reqconn');
+var req=require('../user_calls/reqconn');
 //var conn=require('./_calls/conn')
 
 
@@ -12,17 +12,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/reqconn", function (request, response) {
     
+    var rId=request.body.rId;
     var username=request.body.username;
     var locationname=request.body.locationname;
     var latitude=request.body.latitude;
     var longitude=request.body.longitude;
     console.log('user req');
 
-    req.reqDevice(username,locationname,latitude,longitude,function(data){
+    req.reqDevice(rId,username,locationname,latitude,longitude,function(data){
 
     response.send(data);
   });
 })
+
 
 // app.post("/requested_conn", function (request, response) {
     
