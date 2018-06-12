@@ -1,124 +1,116 @@
 <div id="fullPage">
-<app-header></app-header>
-<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-UU2jkdv1M9UEjLje/kygVxqMBq9Jrg9z+Gqvw972H6BqKTzDvLaRJfK7PnzLM4SI" crossorigin="anonymous">
+  <app-header></app-header>
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/cosmo/bootstrap.min.css" rel="stylesheet" integrity="sha384-UU2jkdv1M9UEjLje/kygVxqMBq9Jrg9z+Gqvw972H6BqKTzDvLaRJfK7PnzLM4SI"
+    crossorigin="anonymous">
 
-<div *ngIf="user.getLog()=='admin'">
-    
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  
-    <div class="topnav" id="myTopnav" style="width:100%;">
-    <div class="navigation-left" style="float:left">
-      <ul class="navbar-nav mr-auto" id="menu">
-        <li>
-          <a class="current" routerLink="/dashboard">Home</a>
-        </li>
- 
-        <li>
-          <a routerLink="/features">Features</a>
-        </li>
-       
-        <li>
-          <div>
-            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select" style="width: 2.5cm">
-              <option value="" disabled selected>Devices</option>
-              <option  value='fetchdata'>Device List</option>
-              <option  value='devicediscovery'>Discover Devices</option>
-              <option  value='registeredDevices'>Registered Devices</option>
-            </select>
-          </div>  
-        </li>
+  <div *ngIf="user.getLog()=='admin'">
 
-        <li>
-            <a routerLink="/requested_conn">Connection Request</a>
-        </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <li>
-          <a routerLink="/add-device">Add New Device</a>
-        </li>
+      <div class="topnav" id="myTopnav" style="width:100%;">
+        <div class="navigation-left" style="float:left">
+          <ul class="navbar-nav mr-auto" id="menu">
+            <li>
+              <a class="current" routerLink="/dashboard">Home</a>
+            </li>
 
-        <li>
-          <a routerLink="/graph">Show Graph</a>
-        </li>
+            <li>
+              <a routerLink="/features">Features</a>
+            </li>
 
-       
-      
-        <table border=1 *ngIf="user.returnCount()==true">
-         <tr>
-           <td background-color="white">
-              <font color="white">Available Devices: {{user.getCount()}}</font>
-           </td>
-         </tr>
-        </table>
+            <li>
+              <div>
+                <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select" style="width: 2.5cm">
+                  <option value="" disabled selected>Devices</option>
+                  <option value='fetchdata'>Device List</option>
+                  <option value='devicediscovery'>Discover Devices</option>
+                  <option value='registeredDevices'>Registered Devices</option>
+                </select>
+              </div>
+            </li>
 
-      </ul>
-    </div>
+            <li>
+              <a routerLink="/admin-connections">Connections</a>
+            </li>
 
-    <div class="navigation-left">
-      <ul style="float:right; white-space:nowrap;">
-        <li>
-          <img src="/assets/images/welcome.png" height="50" width="50">
-          <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
-            <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
-            <option  value='logout' (click)="user.logout()">Logout</option>
-          </select>
-        </li>
-      </ul>
-    </div>
-    </div>
-  </nav>
-  <br>  
-</div>
+            <li>
+              <a routerLink="/requested_conn">Connection Requests</a>
+            </li>
+
+            <li>
+              <a routerLink="/add-device">Add New Device</a>
+            </li>
+
+            <li>
+              <a routerLink="/graph">Show Graph</a>
+            </li>
 
 
-<div *ngIf="user.getLog()!='admin' && user.getLog()">
-    
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  
-    <div class="topnav" id="myTopnav" style="width:100%">
-    <div class="navigation-left" style="float:left">
-      <ul class="navbar-nav mr-auto">
-        <li>
-            <a class="current" routerLink="/dashboard">Home</a>
-        </li>
-        
-        <li>
-          <div>
-            <select class="my-select col s12" #select (change)="Navigate(select.value)" id="select" style="width: 2.5cm">
-              <option value="" disabled selected>Devices</option>
-              <option  value='fetchdata'>Device List</option>
-              <option  value='devicediscovery'>Discover Devices</option>
-            </select>
-          </div>  
-        </li>
 
-        <li>
-          <a routerLink="/connecteddevices">Connections</a>
-        </li>
+            <table border=1 *ngIf="user.returnCount()==true">
+              <tr>
+                <td background-color="white">
+                  <font color="white">Available Devices: {{user.getCount()}}</font>
+                </td>
+              </tr>
+            </table>
 
-        <li>
-          <a routerLink="/reqconnection">Connection Request</a>
-        </li>
+          </ul>
+        </div>
 
-        <li>
-          <a routerLink="/graph">Show Graph</a>
-        </li>
-      </ul>
-      </div>
-
-      <div class="navigation-left">
+        <div class="navigation-left">
           <ul style="float:right; white-space:nowrap;">
             <li>
               <img src="/assets/images/welcome.png" height="50" width="50">
               <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
                 <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
-                <option  value='logout' (click)="user.logout()">Logout</option>
+                <option value='logout' (click)="user.logout()">Logout</option>
               </select>
             </li>
           </ul>
         </div>
-    </div>
-  </nav>
-  <br>  
-</div>
+      </div>
+    </nav>
+    <br>
+  </div>
 
-<router-outlet></router-outlet>
+
+  <div *ngIf="user.getLog()!='admin' && user.getLog()">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <div class="topnav" id="myTopnav" style="width:100%">
+        <div class="navigation-left" style="float:left">
+          <ul class="navbar-nav mr-auto">
+            <li>
+              <a class="current" routerLink="/dashboard">Home</a>
+            </li>
+
+            <li>
+              <a routerLink="/connected-devices">Connections</a>
+            </li>
+
+            <li>
+              <a routerLink="/reqconnection">Connection Request</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="navigation-left">
+          <ul style="float:right; white-space:nowrap;">
+            <li>
+              <img src="/assets/images/welcome.png" height="50" width="50">
+              <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
+                <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
+                <option value='logout' (click)="user.logout()">Logout</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br>
+  </div>
+
+  <router-outlet></router-outlet>

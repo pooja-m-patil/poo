@@ -45,17 +45,18 @@ export class GraphComponent implements OnInit {
      this.selectedAreaItems=[];
       this.http.get("http://localhost:3000/display/mapping").subscribe(res=>{
         var temp1=res.json();
+        console.log(temp1);
         for(let i=0,c=0,m=0;i<4;i++)
         {
-          var dbcity=temp1.rows[i].doc.city;
+          var dbcity=temp1.docs[i].city;
           for(let j=0;j<this.selectedCityItems.length;j++){
           if(this.selectedCityItems[j]==dbcity)
           {
             console.log("db")
             this.iscity=true;
-            this.ref[c]=temp1.rows[i].doc._id;
+            this.ref[c]=temp1.docs[i]._id;
             c++;
-            this.map[m]=temp1.rows[i].doc.mapid;
+            this.map[m]=temp1.docs[i].mapid;
             m++;
           }
         }
@@ -63,7 +64,7 @@ export class GraphComponent implements OnInit {
         //console.log("ref"+this.ref);
         //console.log(this.map);
         this.dropdownAreaList=this.ref;
-        //console.log(this.dropdownAreaList);
+        console.log(this.dropdownAreaList);
 
       //   this.dropdownAreaSettings = {
       //     singleSelection: false,

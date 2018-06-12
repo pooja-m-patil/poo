@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
   constructor(private router:Router ,private http: Http, private user:UserService) { }
 
   ngOnInit() {
-   //this.model.welcome=false;
+   
   }
   
   loginUser=function(e) {
@@ -44,13 +44,10 @@ export class LoginFormComponent implements OnInit {
           var temp=res['_body'];
           if(temp=='true'){
             console.log(temp);
-            //console.log(this.user.getLog());
-            //this.user.setLog();
             console.log(this.model.uname);
             this.user.setWelcome(this.loginObj.username);
             this.user.setLog(this.model.uname);
             this.router.navigate(['dashboard']);
-            //console.log(this.user.getLog());
           }
           else{
             console.log("Username or Password incorrect. Please try again");
@@ -63,31 +60,9 @@ export class LoginFormComponent implements OnInit {
           
          this.model.message="Welcome "+temp;
           this.model.welmsg=true;
-          console.log(temp);
-          // if(temp=='admin'){
-          // this.router.navigate(['dashboard']);
-          // }
-          // else{
-            
-          //   this.router.navigate(['graph']);
-          // }
-          
+          console.log(temp);   
           
           return res;
         })
-
-    // if(username=='admin' && password=='admin')
-    // {
-    //   this.model.visible=true;
-    //   this.user.setUserLoggedIn();
-    //   this.router.navigate(['dashboard']);
-      
-    // }
   }
-  
-  // @Output() messageEvent = new EventEmitter<string>();
-
-  // sendMessage(){
-  //   this.messageEvent.emit(this.model.message)
-  // }
 }

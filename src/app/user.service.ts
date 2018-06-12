@@ -7,34 +7,34 @@ export class UserService {
   private isUserLoggedIn;
   private username;
   private ishide;
-  private key='';
+  private key = '';
   private count;
-  private showCount=false;
-  public uname='';
-  private lname='';
-  private lat='';
-  private lng='';
-  private mapObj=[];
+  private showCount = false;
+  public uname = '';
+  private lname = '';
+  private lat = '';
+  private lng = '';
+  private mapObj = [];
 
-  constructor(private router:Router) {
-    this.isUserLoggedIn=false;
-    this.key='';
-    this.username='admin';
-    this.count=0;
-   
-   }
+  constructor(private router: Router) {
+    this.isUserLoggedIn = false;
+    this.key = '';
+    this.username = 'admin';
+    this.count = 0;
 
-   setUserLoggedIn() {
-     this.isUserLoggedIn=true;
-    
-   }
+  }
 
-   getuserLoggedin() {
-     return this.isUserLoggedIn;
-     
-   }
+  setUserLoggedIn() {
+    this.isUserLoggedIn = true;
 
-   setLog(uname) {
+  }
+
+  getuserLoggedin() {
+    return this.isUserLoggedIn;
+
+  }
+
+  setLog(uname) {
     //this.isUserLoggedIn=true;
     localStorage.setItem(this.key, uname);
   }
@@ -48,53 +48,53 @@ export class UserService {
     //return this.isUserLoggedIn;
     console.log("logout");
     return localStorage.removeItem(this.key);
-    
+
   }
 
-   setHideFetch(){
-     this.ishide=false;
-   }
+  setHideFetch() {
+    this.ishide = false;
+  }
 
-   getHideFetch(){
+  getHideFetch() {
     return this.ishide;
   }
 
-  setWelcome(uname){
+  setWelcome(uname) {
     localStorage.setItem(this.username, uname);
   }
 
-  getWelcome(){
+  getWelcome() {
     return localStorage.getItem(this.username);
- }
+  }
 
- setCount(){
-   this.count++;
- }
+  setCount() {
+    this.count++;
+  }
 
- getCount(){
-   return this.count;
- }
+  getCount() {
+    return this.count;
+  }
 
- resetCount(){
-  this.showCount=false;
-  this.count=0;
-}
+  resetCount() {
+    this.showCount = false;
+    this.count = 0;
+  }
 
-  settingCount(){
-  this.showCount=true;
-}
+  settingCount() {
+    this.showCount = true;
+  }
 
-setMapping(obj){
-  this.mapObj=obj;
-}
+  setMapping(obj) {
+    this.mapObj = obj;
+  }
 
-getMapping(){
-  return this.mapObj;
+  getMapping() {
+    return this.mapObj;
 
-}
+  }
 
-returnCount(){
-  return this.showCount;
-}
+  returnCount() {
+    return this.showCount;
+  }
 
 }

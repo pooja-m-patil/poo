@@ -4,15 +4,19 @@
       <thead>
         <tr>
           <th scope="col">Index</th>
+          <th scope="col">Device Id</th>
+          <th scope="col">Username</th>
           <th scope="col">Location</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr class="table-active" *ngFor="let loc of location; let i=index;">
+        <tr class="table-active" *ngFor="let list of connList; let i=index;">
           <td>{{i+1}}</td>
-          <td>{{loc}}</td>
-          <td (click)="showGraph(loc)"><button type="button" class="btn btn-primary">Show Location on Map</button></td>
+          <td>{{list._id}}</td>
+          <td>{{list.username}}</td>
+          <td>{{list.locationname}}</td>
+          <td (click)="showGraph(list.locationname)"><button type="button" class="btn btn-primary">Show Location on Map</button></td>
         </tr>
       </tbody>
     </table>

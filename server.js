@@ -104,7 +104,7 @@ app.post("/remoteApp", function (req, res) {
   {
     if (temp == deviceId) 
     {
-      res.send(auth);
+      res.send({Authentication_Token:auth});
     }
     else 
     {
@@ -130,7 +130,7 @@ app.post("/remoteApp", function (req, res) {
       }
       else 
       {
-        res.send("Not valid device");
+        res.send({Message:"Not valid device"});
         return;
       }
     });

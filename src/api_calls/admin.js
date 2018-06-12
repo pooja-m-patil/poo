@@ -9,9 +9,17 @@ var confirm = require('../admin_calls/confirmUserReq');
 //var del=require('./admin_calls/delRegDev');
 var getDev = require('../admin_calls/getConfirmedDev');
 var fetchDoc1 = require('../api_calls/fetchWholeDoc');
+var list=require('../admin_calls/connList')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/adminlist", function (request, response) {
+  console.log("admin list");
+  list.connList(function (data) {
+    response.send(data);
+  })
+})
 
 app.get("/requested_conn", function (request, response) {
 
@@ -43,6 +51,14 @@ app.post("/confirmReq", function (request, response) {
 
     if (dId == devId) {
       confirm.confirmUserReq(dId, data, uname, locname, lat, lng, function (data) {
+
+        // app.post("/connectDevice", function (request, response) {
+        //   var id=request.body.deviceId;
+        //   console.log("deviceId"+id);
+        //   if(id==dId){
+        //     response.send(id);
+        //   }
+        // })
         response.send(data);
       });
     }
@@ -56,10 +72,20 @@ app.post("/confirmReq", function (request, response) {
 //   })
 // })
 
+app.post("/connectDevice", function (request, response) {
+    var id=request.body.deviceId;
+    console.log("deviceId"+id);
+    // if(id==dId){
+      response.send({"deviceId":id});
+    // }
+  })
+
+
 app.get('/getConfirmedDevices', function (request, response) {
   getDev.userConnDevices(function (data) {
     response.send(data);
   })
 })
+
 
 module.exports = app;

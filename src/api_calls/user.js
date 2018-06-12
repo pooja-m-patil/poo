@@ -4,6 +4,7 @@ var cfenv = require("cfenv");
 var request = require("request");
 var bodyParser = require('body-parser');
 var req=require('../user_calls/reqconn');
+var usrDev=require('../user_calls/userDevices')
 //var conn=require('./_calls/conn')
 
 
@@ -25,7 +26,17 @@ app.post("/reqconn", function (request, response) {
   });
 })
 
+app.post("/confirmed_devices", function (request, response) {
+    
+  var username=request.body.uname;
+ 
+  console.log('user req');
 
+  usrDev.confirmedUserDevices(username,function(data){
+
+  response.send(data);
+});
+})
 // app.post("/requested_conn", function (request, response) {
     
 //   console.log('requested conn');

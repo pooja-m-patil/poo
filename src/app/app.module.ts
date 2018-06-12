@@ -28,6 +28,7 @@ import { ConnectedDevicesComponent } from './connected-devices/connected-devices
 import { RequestedConnectionComponent } from './requested-connection/requested-connection.component';
 import { AgmCoreModule } from '@agm/core';
 import { MappingDevicesComponent } from './mapping-devices/mapping-devices.component';
+import { AdminConnectionListComponent } from './admin-connection-list/admin-connection-list.component';
 //import {GoogleMapsAPIWrapper} from "angular2-google-maps/core/services/google-maps-api-wrapper"
 //import {MapsAPILoader} from '@agm/core';
 
@@ -98,7 +99,17 @@ const appRoutes:Routes=[
 {
   path:'mapping-devices',
   component:MappingDevicesComponent
+},
+{
+  path:'connected-devices',
+  component:ConnectedDevicesComponent
+},
+{
+  path:'admin-connections',
+  component:AdminConnectionListComponent
 }
+
+
 
 ]
 
@@ -123,6 +134,7 @@ const appRoutes:Routes=[
     ConnectedDevicesComponent,
     RequestedConnectionComponent,
     MappingDevicesComponent,
+    AdminConnectionListComponent,
     
   ],
   imports: [

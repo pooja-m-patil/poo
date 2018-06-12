@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Http, Response, Headers } from '@angular/http';
-import { } from '@types/googlemaps';
+//import { } from '@types/googlemaps';
 
 @Component({
   selector: 'app-mapping-devices',
