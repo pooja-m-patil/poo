@@ -114,3 +114,23 @@
   </div>
 
   <router-outlet></router-outlet>
+
+  <!-- <select class="my-select col s12" #chat (change)="watson(chat.value)">
+  <option value="" disabled selected>Chatbox</option>
+  <option *ngFor="let msg of msgArray; let i=index;">{{msg}}</option>
+      <input type="textbox" placeholder="Enter your message">
+      <input class="btn btn-success" type="submit" value="Send">
+</select> -->
+
+<button (click)="toggleDiv()">Chatbox</button>
+  <div class="chatbox" style="border:1px solid black; width:30%" *ngIf="showDiv">
+    <table class="table table-hover">
+          <tr class="table-active" *ngFor="let msg of messages; let i=index;" [class.right]="msg.self">
+          <td>{{msg.text}}</td>
+          </tr>
+    </table>
+    <form (submit)="watson($event)">
+        <input type="textbox" placeholder="Enter your message" name="txt" [(ngModel)]="userData">
+        <input class="btn" type="submit" value="Send">
+    </form>
+  </div>

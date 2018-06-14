@@ -29,6 +29,7 @@ import { RequestedConnectionComponent } from './requested-connection/requested-c
 import { AgmCoreModule } from '@agm/core';
 import { MappingDevicesComponent } from './mapping-devices/mapping-devices.component';
 import { AdminConnectionListComponent } from './admin-connection-list/admin-connection-list.component';
+import { ChatboxComponent } from './chatbox/chatbox.component';
 //import {GoogleMapsAPIWrapper} from "angular2-google-maps/core/services/google-maps-api-wrapper"
 //import {MapsAPILoader} from '@agm/core';
 
@@ -107,6 +108,10 @@ const appRoutes:Routes=[
 {
   path:'admin-connections',
   component:AdminConnectionListComponent
+},
+{
+  path:'chatbox',
+  component:ChatboxComponent
 }
 
 
@@ -135,6 +140,7 @@ const appRoutes:Routes=[
     RequestedConnectionComponent,
     MappingDevicesComponent,
     AdminConnectionListComponent,
+    ChatboxComponent,
     
   ],
   imports: [

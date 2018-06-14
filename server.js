@@ -85,6 +85,7 @@ app.post("/watson_assistant", function (request, res) {
     }
 
     if (response.output.text.length != 0) {
+      console.log(JSON.stringify(response,null,2));
       console.log(response.output.text[0]);
       res.send(response.output.text[0]);
     }
