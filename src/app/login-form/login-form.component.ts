@@ -15,6 +15,7 @@ export class LoginFormComponent implements OnInit {
   public model=new Model();
   loginObj:object={};
   
+  
   constructor(private router:Router ,private http: Http, private user:UserService) { }
 
   ngOnInit() {
@@ -65,4 +66,6 @@ export class LoginFormComponent implements OnInit {
           return res;
         })
   }
+
+  
 }

@@ -10,6 +10,8 @@ import { Model } from '../model';
 export class AddDeviceComponent implements OnInit {
 
   types=[];
+  msgObj:object={};
+  msg:string;
 
 
   public model=new Model();
@@ -57,6 +59,35 @@ export class AddDeviceComponent implements OnInit {
       }
       console.log(this.types);
 
+    })
+  }
+
+  
+
+  welcome=function(){
+    this.http.post('http://localhost:3000/welcome_assistant', this.msgObj)
+    .subscribe((res:Response) =>{
+
+      console.log(res);
+      this.msg=res['_body'];
+      console.log(this.msg);
+    })
+  }
+
+  watson=function(e) {
+    e.preventDefault();
+    console.log(e);
+    var msg=e.target.elements[0].value;
+
+    this.msgObj={
+      "msg":msg
+    }
+    this.http.post('http://localhost:3000/watson_assistant', this.msgObj)
+    .subscribe((res:Response) =>{
+
+      console.log(res);
+      this.msg=res['_body'];
+      console.log(this.msg);
     })
   }
 

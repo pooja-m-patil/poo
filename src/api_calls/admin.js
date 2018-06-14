@@ -72,13 +72,13 @@ app.post("/confirmReq", function (request, response) {
 //   })
 // })
 
-app.post("/connectDevice", function (request, response) {
-    var id=request.body.deviceId;
-    console.log("deviceId"+id);
-    // if(id==dId){
-      response.send({"deviceId":id});
-    // }
-  })
+// app.post("/connectDevice", function (request, response) {
+//     var id=request.body.deviceId;
+//     console.log("deviceId"+id);
+//     // if(id==dId){
+//       response.send({"deviceId":id});
+//     // }
+//   })
 
 
 app.get('/getConfirmedDevices', function (request, response) {

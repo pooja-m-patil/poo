@@ -50,3 +50,10 @@
 </div>
 
 <b><h3 *ngIf="model.isDeleted">Device {{model.deleted}} is successfully deleted</h3></b>
+
+<button (click)="welcome()">Chatbox</button>
+<form class="form" (submit)="watson($event)">
+  <input type="text" placeholder="Enter your message" />
+  <input class="btn btn-success" type="submit" value="assist" />
+</form>
+<h2>{{msg}}</h2>
