@@ -76,7 +76,7 @@ export class AppComponent implements OnInit,OnDestroy{
       "msg":this.msg
     }
     this.userData="";
-    this.http.post('http://localhost:3000/watson_assistant', this.msgObj)
+    this.http.post('http://localhost:3000/display/watson_assistant', this.msgObj)
     .subscribe((res:Response) =>{
 
       console.log(res);
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit,OnDestroy{
   ngOnInit() {
    this.user.getCount();
 
-   this.http.post('http://localhost:3000/welcome_assistant', "")
+   this.http.post('http://localhost:3000/display/welcome_assistant', "")
    .subscribe((res:Response) =>{
 
      console.log(res);

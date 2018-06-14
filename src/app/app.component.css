@@ -51,6 +51,7 @@ select{
   color:white; 
   padding: 14px 16px; 
   font-size: 17px;
+  width:200px;
 }
 
 /* @media screen and (max-width: 600px) {
@@ -87,4 +88,9 @@ div.chatbox {
 
 .btn {
   background-color: cornflowerblue; 
+}
+
+#chatdiv {
+  bottom: 0;
+  left: 0;
 }

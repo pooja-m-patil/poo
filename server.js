@@ -10,92 +10,137 @@ var route = require('./src/api_calls/route');
 var user = require('./src/api_calls/user');
 var admin = require('./src/api_calls/admin');
 var socketIo = require('socket.io');
-
+var watson=require('./src/api_calls/watson_assistant');
 var dev = require('./src/api_calls/devices');
 var status;
 var auth;
 var deviceId;
-var msg;
+var temp;
+var socket1;
+var initArray=[];
 
+var server = app.listen(3000, function () {
+  console.log("Listening on port:3000");
+});
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
-
-var prompt = require('prompt-sync')();
-var AssistantV1 = require('watson-developer-cloud/assistant/v1');
-
-var server = app.listen(3000, function () {
-  console.log("Listening on port:3000");
-});
-
-// Set up Assistant service wrapper.
-var service = new AssistantV1({
-  username: 'bf080d0a-4a64-425d-a931-27a0b1d8803a', // replace with service username
-  password: '5LLFJtgO403m', // replace with service password
-  version: '2018-02-16'
-});
-
-var workspace_id = 'fd970b5d-c53d-4ced-b0ca-517efc5d8f0c'; // replace with workspace ID
-
-app.post("/welcome_assistant", function (request, res) {
-
-  service.message({
-    workspace_id: workspace_id
-  }, processResponse);
-
-  
-  function processResponse(err, response) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    if (response.output.text.length != 0) {
-      console.log(response.output.text[0]);
-      res.send(response.output.text[0]);
-    }
-  }
-})
-
-app.post("/watson_assistant", function (request, res) {
-
-  var input = request.body.msg;
-
-  console.log(input);
-  var newMessageFromUser = input;
-
-  service.message({
-    workspace_id: workspace_id,
-    input: { text: newMessageFromUser },
-  },processResponse)
-
-  function processResponse(err, response) {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    if (response.output.text.length != 0) {
-      console.log(JSON.stringify(response,null,2));
-      console.log(response.output.text[0]);
-      res.send(response.output.text[0]);
-    }
-  }
-});
-
 app.use('/display', route);
 app.use('/display', user);
 app.use('/display', admin);
+app.use('/display',watson);
 
+devicesObj = {
+  devArray: [],
+  find: function (uid) {
+    return this.devArray.findIndex(dev => dev.uid === uid);
+  },
+  splice: function (uid) {
+    this.devArray.splice(this.find(uid), 1);
+  },
+  pick: function () {
+    return this.devArray.map(device => device.uid);
+  },
+  emit: function () {
+    initArray=this.devArray.slice(0);
+    socket1.emit("Available devices", this.pick());
+  },
+  setTimer: function (uid) {
+    return setTimeout(() => {
+      this.splice(uid);
+      this.emit();
+    }, 8000)
+  },
+  resetTimer: function (uid) {
+    let timer = this.devArray[this.find(uid)].timer
+    clearTimeout(timer);
+    this.devArray[this.find(uid)].timer = this.setTimer(uid);
+  },
+  add: function (uid) {
+    console.log("uid"+uid);
+    
+    if (this.find(uid) === -1) {  // Device not available
+      device = {
+        uid,
+        timer: this.setTimer(uid)
+      }
+      this.devArray.push(device);
+      this.emit();
+    } else { // Device already availbale
+      this.resetTimer(uid);
+    }
+  }
+}
+
+var io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log("A new WebSocket connection has been established");
+  socket1 = socket;
+})
+
+app.post("/remoteApp", function (req, res) {
+
+  if (req.body.deviceId) {
+    deviceId = req.body.deviceId;
+  }
+  if (req.body.added) {
+    status = true;
+    auth = req.body.added;
+  }
+  if (req.body.id) {
+    temp = req.body.id;
+  }
+
+  if(status) 
+  {
+    if (temp == deviceId) 
+    {
+      res.send({Authentication_Token:auth});
+    }
+    else 
+    {
+      res.send("");
+    }
+  }
+  else 
+  {
+    var uid = req.body.deviceId;
+    dev.devices(uid, function (data) 
+    {
+      if (data.bookmark != 'nil') 
+      {
+        if (data.bookmark == undefined) 
+        {
+          res.send("");
+          return;
+        }
+        else 
+        {
+          devicesObj.add(uid);
+        }
+      }
+      else 
+      {
+        res.send({Message:"Not valid device"});
+        return;
+      }
+    });
+  }
+})
+
+app.get("/initarray", function (req, res) {
+  res.send(devicesObj.emit());
+})
 
 // app.post("/connectDevice", function (request, response) {
 //   var id=request.body.deviceId;
