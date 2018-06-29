@@ -10,7 +10,7 @@ var route = require('./src/api_calls/route');
 var user = require('./src/api_calls/user');
 var admin = require('./src/api_calls/admin');
 var socketIo = require('socket.io');
-var watson=require('./src/api_calls/watson_assistant');
+var watson=require('./src/api_calls/watson_service');
 var dev = require('./src/api_calls/devices');
 var status;
 var auth;

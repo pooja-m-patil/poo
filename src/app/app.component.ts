@@ -21,6 +21,8 @@ export class AppComponent implements OnInit,OnDestroy{
   self:boolean=false;
   messages=[];
   userData:string;
+  disc_msg:string;
+  disc_req:string;
 
   
   stockQuote:number;
@@ -81,10 +83,33 @@ export class AppComponent implements OnInit,OnDestroy{
 
       console.log(res);
       this.self=false;
-      this.msg=res['_body'];
-      this.pushData();
-      console.log(this.messages);
-      console.log(this.messages[0].text);
+      var temp=res['_body'];
+      if(temp=='Error'){
+        console.log("Go to Discovery")
+       
+        this.http.post('http://localhost:3000/display/watson_discovery', this.msgObj)
+          .subscribe((res:Response) =>{
+            console.log(res);
+            var temp=res.json();
+            console.log(temp);
+            console.log(temp.results[0].text);
+            this.msg='Sorry. Cannot recognize the input. Is this what you wanted to find?';
+            this.self=false;
+            this.pushData();
+            console.log(temp.results[0].highlight);
+            this.msg=temp.results[0].highlight.text;
+            this.self=false;
+            this.pushData();
+        })
+      }
+      else{
+        this.msg=temp;
+        this.self=false;
+        this.pushData();
+        console.log(this.messages);
+        console.log(this.messages[0].text);
+      }
+      
     })
   }
 
@@ -97,6 +122,13 @@ export class AppComponent implements OnInit,OnDestroy{
       "text":this.msg,
       "self":this.self
     })
+  }
+
+  discovery=function(){
+    this.http.post('http://localhost:3000/display/disc', "")
+   .subscribe((res:Response) =>{
+
+   })
   }
   
 
