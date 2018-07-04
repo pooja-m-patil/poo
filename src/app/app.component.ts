@@ -144,6 +144,7 @@ export class AppComponent implements OnInit,OnDestroy{
   
 
   ngOnInit() {
+
    this.user.getCount();
 
    this.http.post('http://localhost:3000/display/welcome_assistant', "")

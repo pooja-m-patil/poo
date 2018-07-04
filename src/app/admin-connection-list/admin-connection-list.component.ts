@@ -31,23 +31,29 @@ export class AdminConnectionListComponent implements OnInit {
     console.log(this.latitude + " " + this.longitude);
   }
 
-  getData = function (loc) {
-    console.log(loc);
-    this.http.get("http://localhost:3000/real-time-data").subscribe(res => {
+  getData = function (dId) {
+    console.log(dId);
+
+    this.locObj={
+      location:dId
+    }
+
+    this.http.post("http://localhost:3000/real-time-data",this.locObj).subscribe(res => {
       console.log(res);
     })
 
     this.sub = this.dataService.getDeviceData()
       .subscribe(quote => {
         console.log(quote);
-        this.chartLabels.push("");
-        this.realTimeData.push(quote);
+        this.chartLabels.push(quote.time);
+        this.realTimeData.push(quote.usage);
+        console.log(quote.time);
         console.log(this.realTimeData);
-        this.chartData = [{ data: this.realTimeData, label: "Real time data" }];
+        this.chartData = [{ data: this.realTimeData, label: dId }];
 
         if (this.realTimeData.length == 10 || this.realTimeData.length > 10) {
-          this.realTimeData.length = 0;
-          this.chartLabels.length = 0;
+          this.realTimeData.splice(0,1);
+          this.chartLabels.splice(0,1);
         }
       })
   }

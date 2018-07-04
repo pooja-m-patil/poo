@@ -15,27 +15,45 @@ export class DataService {
   socket: Socket=socketIo('http://localhost:3000');
   observer: Observer<any>;
 
-  getQuotes() : Observable<any> 
-  {
-    this.socket.on('Available devices', (res) => {
-      console.log(res);
-      this.observer.next(res);
-    });
+  // getQuotes() : Observable<any> 
+  // {
+  //   this.socket.on('Available devices', (res) => {
+  //     console.log(res);
+  //     this.observer.next(res);
+  //   });
 
-    return new Observable(observer => {
-      this.observer = observer;
-    });
-  }
+  //   return new Observable(observer => {
+  //     this.observer = observer;
+  //   });
+  // }
 
-  getDeviceData() : Observable<any> 
-  {
-    this.socket.on('device data', (res) => {
-      console.log(res);
-      this.observer.next(res);
+  public getQuotes = () => {
+    //this.socket=socketIo('http://localhost:3000');
+    return Observable.create((observer) => {
+    this.socket.on('Available devices', (message) => {
+    observer.next(message);
     });
+    });
+    }
 
-    return new Observable(observer => {
-      this.observer = observer;
+  // getDeviceData() : Observable<any> 
+  // {
+  //   this.socket.on('device data', (res) => {
+  //     console.log(res);
+  //     this.observer1.next(res);
+  //   });
+
+  //   return new Observable(observer1 => {
+  //     this.observer1 = observer1;
+  //   });
+  // }
+
+  public getDeviceData = () => {
+    //this.socket=socketIo('http://localhost:3000');
+    return Observable.create((observer) => {
+    this.socket.on('device data', (message) => {
+    observer.next(message);
     });
-  }
+    });
+    }
 }

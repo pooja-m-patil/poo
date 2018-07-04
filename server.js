@@ -136,13 +136,15 @@ app.post("/remoteApp", function (req, res) {
   }
 })
 
-app.get("/real-time-data", function (req, res) {
+app.post("/real-time-data", function (req, res) {
 
   var Client = require("ibmiotf");
+  var loc=req.body.location;
+  console.log(loc);
 
   var appClientConfig = {
     "org": 'tgacg8',
-    "id": 'd1111',
+    "id": 'myapp',
     "auth-key":'a-tgacg8-p3heyf1c1g',
     "auth-token":'oFmcgTeiCBw@Q4*vj('
   };
@@ -154,7 +156,7 @@ app.get("/real-time-data", function (req, res) {
 
   appClient.on("connect", function () {
 
-    appClient.subscribeToDeviceEvents("+", "+", "status");
+    appClient.subscribeToDeviceEvents("+", loc, "status");
     
   });
 
@@ -162,8 +164,8 @@ app.get("/real-time-data", function (req, res) {
 
     console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
     var temp=JSON.parse(payload);
-    console.log(temp.data.d.usage)
-    socket1.emit("device data",temp.data.d.usage);
+    console.log(temp.d.usage)
+    socket1.emit("device data",{"usage":temp.d.usage,"time":temp.d.time});
 });
 res.send("data");
 })
