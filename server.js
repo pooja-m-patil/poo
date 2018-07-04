@@ -10,14 +10,14 @@ var route = require('./src/api_calls/route');
 var user = require('./src/api_calls/user');
 var admin = require('./src/api_calls/admin');
 var socketIo = require('socket.io');
-var watson=require('./src/api_calls/watson_service');
+var watson = require('./src/api_calls/watson_service');
 var dev = require('./src/api_calls/devices');
 var status;
 var auth;
 var deviceId;
 var temp;
 var socket1;
-var initArray=[];
+var initArray = [];
 
 var server = app.listen(3000, function () {
   console.log("Listening on port:3000");
@@ -37,7 +37,7 @@ app.use(function (req, res, next) {
 app.use('/display', route);
 app.use('/display', user);
 app.use('/display', admin);
-app.use('/display',watson);
+app.use('/display', watson);
 
 devicesObj = {
   devArray: [],
@@ -51,7 +51,7 @@ devicesObj = {
     return this.devArray.map(device => device.uid);
   },
   emit: function () {
-    initArray=this.devArray.slice(0);
+    initArray = this.devArray.slice(0);
     socket1.emit("Available devices", this.pick());
   },
   setTimer: function (uid) {
@@ -66,8 +66,8 @@ devicesObj = {
     this.devArray[this.find(uid)].timer = this.setTimer(uid);
   },
   add: function (uid) {
-    console.log("uid"+uid);
-    
+    console.log("uid" + uid);
+
     if (this.find(uid) === -1) {  // Device not available
       device = {
         uid,
@@ -101,42 +101,73 @@ app.post("/remoteApp", function (req, res) {
     temp = req.body.id;
   }
 
-  if(status) 
-  {
-    if (temp == deviceId) 
-    {
-      res.send({Authentication_Token:auth});
+  if (status) {
+    if (temp == deviceId) {
+      res.send({ Authentication_Token: auth });
     }
-    else 
-    {
+    else {
       res.send("");
     }
   }
-  else 
-  {
+  else {
     var uid = req.body.deviceId;
-    dev.devices(uid, function (data) 
-    {
-      if (data.bookmark != 'nil') 
-      {
-        if (data.bookmark == undefined) 
-        {
-          res.send("");
-          return;
-        }
-        else 
-        {
-          devicesObj.add(uid);
-        }
+    dev.devices(uid, function (data) {
+      if (data.bookmark != 'nil') {
+        // if (data.bookmark == undefined) 
+        // {
+        //   res.send("");
+        //   return;
+        // }
+        dev.authAvailable(uid, function (data) {
+          console.log(data);
+          if (data.bookmark != 'nil') {
+            res.send({ Authentication_Token: data.docs[0].data.authToken })
+          }
+        })
+
+        devicesObj.add(uid);
+
       }
-      else 
-      {
-        res.send({Message:"Not valid device"});
+      else {
+        res.send({ Message: "Not valid device" });
         return;
       }
     });
   }
 })
+
+app.get("/real-time-data", function (req, res) {
+
+  var Client = require("ibmiotf");
+
+  var appClientConfig = {
+    "org": 'tgacg8',
+    "id": 'd1111',
+    "auth-key":'a-tgacg8-p3heyf1c1g',
+    "auth-token":'oFmcgTeiCBw@Q4*vj('
+  };
+
+  var appClient = new Client.IotfApplication(appClientConfig);
+
+
+  appClient.connect();
+
+  appClient.on("connect", function () {
+
+    appClient.subscribeToDeviceEvents("+", "+", "status");
+    
+  });
+
+  appClient.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+
+    console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
+    var temp=JSON.parse(payload);
+    console.log(temp.data.d.usage)
+    socket1.emit("device data",temp.data.d.usage);
+});
+res.send("data");
+})
+
 
 app.get("/initarray", function (req, res) {
   res.send(devicesObj.emit());

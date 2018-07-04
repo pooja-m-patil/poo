@@ -92,14 +92,25 @@ export class AppComponent implements OnInit,OnDestroy{
             console.log(res);
             var temp=res.json();
             console.log(temp);
+            if(temp.results[0]){
             console.log(temp.results[0].text);
             this.msg='Sorry. Cannot recognize the input. Is this what you wanted to find?';
             this.self=false;
             this.pushData();
             console.log(temp.results[0].highlight);
-            this.msg=temp.results[0].highlight.text;
+            var change=temp.results[0].highlight.text.toString();
+            //var text = $(content).text();
+            //this.msg=change.match('/<{1}\/{0,1}\w+>{1}/');
+            this.msg=change.replace(/<[^>]*>/g,'');
+            console.log(this.msg);
             this.self=false;
             this.pushData();
+            }
+            else{
+              this.self=false;
+              this.msg="Sorry.. Can not recognize. Try again..";
+              this.pushData();
+            }
         })
       }
       else{

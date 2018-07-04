@@ -51,66 +51,72 @@ const appRoutes:Routes=[
   // { path: '', redirectTo: '/app-login-form', pathMatch: 'full' },
   {
       path:'dashboard',
-      //canActivate:[AuthguardGuard],
+      canActivate:[AuthguardGuard],
       component:DashboardComponent
   },
   {
     path:'fetchdata',
-    //canActivate:[AuthguardGuard],
+    canActivate:[AuthguardGuard],
     component:FetchdataComponent
 },
 {
   path:'add-device',
-  //canActivate:[AuthguardGuard],
+  canActivate:[AuthguardGuard],
   component:AddDeviceComponent
 },
 {
   path:'graph',
-  //canActivate:[AuthguardGuard],
+  canActivate:[AuthguardGuard],
   component:GraphComponent
 },
 {
   path:'features',
-  //canActivate:[AuthguardGuard],
+  canActivate:[AuthguardGuard],
   component:FeaturesComponent
 },
   {
     path:'retrivedata',
-    //canActivate:[AuthguardGuard],
+    canActivate:[AuthguardGuard],
     component:RetrivedataComponent
 },
 {
   path:'devicediscovery',
-  //canActivate:[AuthguardGuard],
+  canActivate:[AuthguardGuard],
   component:DeviceDiscoveryComponent
 },
 {
   path:'devicetype',
-  //canActivate:[AuthguardGuard],
+  canActivate:[AuthguardGuard],
   component:DevicetypeComponent
 },
 {
   path:'reqconnection',
+  canActivate:[AuthguardGuard],
   component:ConnectionRequestComponent
 },
 {
   path:'requested_conn',
+  canActivate:[AuthguardGuard],
   component:RequestedConnectionComponent
 },
 {
   path:'mapping-devices',
+  canActivate:[AuthguardGuard],
   component:MappingDevicesComponent
 },
 {
   path:'connected-devices',
+  canActivate:[AuthguardGuard],
   component:ConnectedDevicesComponent
 },
 {
   path:'admin-connections',
+  canActivate:[AuthguardGuard],
   component:AdminConnectionListComponent
 },
 {
   path:'chatbox',
+  canActivate:[AuthguardGuard],
   component:ChatboxComponent
 }
 

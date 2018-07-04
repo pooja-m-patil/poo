@@ -26,4 +26,16 @@ export class DataService {
       this.observer = observer;
     });
   }
+
+  getDeviceData() : Observable<any> 
+  {
+    this.socket.on('device data', (res) => {
+      console.log(res);
+      this.observer.next(res);
+    });
+
+    return new Observable(observer => {
+      this.observer = observer;
+    });
+  }
 }

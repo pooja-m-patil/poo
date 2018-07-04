@@ -82,7 +82,7 @@ app.post("/watson_discovery", function (request, res) {
     var request = require("request");
 
     var options = { method: 'GET',
-      url: 'https://gateway.watsonplatform.net/discovery/api/v1/environments/37f17fbd-8d85-42e1-b847-df0762d9da65/collections/f96f87f2-47f2-4259-ac93-1333d962b7a0/query',
+      url: 'https://gateway.watsonplatform.net/discovery/api/v1/environments/37f17fbd-8d85-42e1-b847-df0762d9da65/collections/f214a2af-57fe-4a85-91f5-2cd616456a5e/query',
       qs: 
        { query: 'enriched_text.semantic_roles.sentence:'+input,
          highlight: 'true',

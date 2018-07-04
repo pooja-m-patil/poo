@@ -49,7 +49,8 @@ export class UserService {
     console.log("logout");
     return localStorage.removeItem(this.key);
 
-  }
+  } 
+
 
   setHideFetch() {
     this.ishide = false;
