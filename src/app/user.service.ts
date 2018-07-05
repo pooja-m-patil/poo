@@ -63,13 +63,13 @@ export class UserService {
     return this.ishide;
   }
 
-  setWelcome(uname) {
-    localStorage.setItem(this.username, uname);
-  }
+  // setWelcome(uname) {
+  //   localStorage.setItem(this.username, uname);
+  // }
 
-  getWelcome() {
-    return localStorage.getItem(this.username);
-  }
+  // getWelcome() {
+  //   return localStorage.getItem(this.username);
+  // }
 
   setCount() {
     this.count++;

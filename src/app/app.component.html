@@ -63,7 +63,7 @@
             <li>
               <img src="/assets/images/welcome.png" height="50" width="50">
               <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
-                <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
+                <option value="" disabled selected>Welcome   {{user.getLog()}}</option>
                 <option value='logout' (click)="user.logout()">Logout</option>
               </select>
             </li>
@@ -102,7 +102,7 @@
             <li>
               <img src="/assets/images/welcome.png" height="50" width="50">
               <select class="my-select col s12" #select1 (change)="adminSelect(select1.value)">
-                <option value="" disabled selected>Welcome {{user.getWelcome()}}</option>
+                <option value="" disabled selected>Welcome {{user.getLog()}}</option>
                 <option value='logout' (click)="user.logout()">Logout</option>
               </select>
             </li>
@@ -122,17 +122,18 @@
       <input class="btn btn-success" type="submit" value="Send">
 </select> -->
 
+
 <div id="chatdiv" *ngIf="user.getLog()">
-<button (click)="toggleDiv()">Chatbox</button>
-  <div class="chatbox" style="border:1px solid black; width:20%" *ngIf="showDiv">
+  <div class="chatbox" *ngIf="showDiv">
     <table class="table table-hover">
           <tr class="table-active" *ngFor="let msg of messages; let i=index;" [class.right]="msg.self">
           <td>{{msg.text}}</td>
           </tr>
     </table>
-    <form (submit)="watson($event)">
-        <input type="textbox" placeholder="Enter your message" name="txt" [(ngModel)]="userData">
+    <form (submit)="watson($event)" style="bottom: 5%; position:fixed;">
+        <input type="textbox" placeholder="Enter your message" name="txt" [(ngModel)]="userData" style="width:75%;">
         <input class="btn" type="submit" value="Send">
     </form>
   </div>
+  <button class="chatButton" style="right:1%; bottom: 1%; position:fixed;"  (click)="toggleDiv()">Chatbox</button>
 </div>

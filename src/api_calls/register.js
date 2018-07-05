@@ -52,12 +52,6 @@ exports.registerUser=function(uname,pass,callback)
   //   ///if(found)
   //   //{
   let hash = bcrypt.hashSync(pass,salt);
-  console.log(uname+" "+role+" "+hash);
-  // register.insert({Username:uname,Role:role,Password:hash},function(data) {
-  //   //console.log('Error:', err);
-  //   console.log(status);
-  //   callback(data);
-  //});
 
   var request = require("request");
 

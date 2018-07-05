@@ -70,7 +70,7 @@ reqNewDevice=function(e){
 
   this.productObj={
     "rId":this.rId,
-    "username":this.user.getWelcome(),
+    "username":this.user.getLog(),
     "locationname":e.path[0][3].value,
     "latitude":this.latitude,
     "longitude":this.longitude

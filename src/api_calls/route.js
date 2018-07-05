@@ -87,7 +87,7 @@ app.post("/register", function (request, response) {
   //console.log(request.body.username);
   var uname = request.body.email;
   var pass1 = request.body.pass1;
-  console.log(uname + " " + role + " " + pass1);
+  console.log(uname + " " + " " + pass1);
   reg.registerUser(uname, pass1, function (data) {
     console.log(data);
     response.send(data);

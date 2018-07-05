@@ -32,8 +32,8 @@ export class LoginFormComponent implements OnInit {
       "password":this.model.pwd
     }
 
+    
     if(this.model.uname=="admin"){
-      this.user.setWelcome(this.loginObj.username);
       this.user.setLog(this.model.uname);
       this.router.navigate(['dashboard']);
     }
@@ -46,7 +46,6 @@ export class LoginFormComponent implements OnInit {
           if(temp=='true'){
             console.log(temp);
             console.log(this.model.uname);
-            this.user.setWelcome(this.loginObj.username);
             this.user.setLog(this.model.uname);
             this.router.navigate(['dashboard']);
           }

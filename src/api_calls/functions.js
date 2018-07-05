@@ -166,11 +166,31 @@ exports.delDevice = function (devName, callback) {
 
 exports.getDevicesInfo = function (id, callback) {
   console.log(id);
-  mydbiot.get(id, function (err, data) {
-    console.log('Error:', err);
-    console.log(data.authToken);
-    callback(data.authToken);
-  });
+  var options = {
+    method: 'POST',
+    url: 'https://722fa7b8-0c41-4d59-ac8c-1c02d25eaef5-bluemix.cloudant.com/mydbiot/_find',
+    headers:
+      {
+        'postman-token': 'fed52f4d-d985-f124-04dc-68048e028e27',
+        'cache-control': 'no-cache',
+        authorization: 'Basic NzIyZmE3YjgtMGM0MS00ZDU5LWFjOGMtMWMwMmQyNWVhZWY1LWJsdWVtaXg6YjdkZGQyOGJmNzU1ODk1Nzg4NjA3NDU3YmRmMjgyZGJmNzJkY2EzMTg3YzA1ZDIwMTZjYjAzNGU5MDI1MDFhNw==',
+        'content-type': 'application/json'
+      },
+    body:
+      {
+        selector: { _id: id },
+        fields: ['_id', 'data.authToken'],
+        sort: [{ _id: 'asc' }]
+      },
+    json: true
+  };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+    callback(body.docs[0].data.authToken);
+});
 }
 
 exports.addToDb = function (id, data, callback) {

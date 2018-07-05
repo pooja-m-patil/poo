@@ -49,7 +49,6 @@ export class SignupComponent implements OnInit {
    
     //this.model.pwd=e.target.elements[1].value;
     console.log(email);
-    console.log(role);
     console.log(pass1);
    
     

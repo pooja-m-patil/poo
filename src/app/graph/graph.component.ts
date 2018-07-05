@@ -119,21 +119,35 @@ export class GraphComponent implements OnInit {
       this.http.post("http://localhost:3000/display/graph",this.month).subscribe(res=>{
         
         var temp=res.json();
+        console.log(temp);
         for(let l=0;l<temp.length;l++)
         {
           var tempvar=temp[l].timestamp;
+          console.log(tempvar);
           var dbTStamp=new Date(tempvar);
-          var dbDate=dbTStamp.getUTCDate();
-          for(let d=0;d<this.date.length;d++)
-          {
-            if(dbDate==this.date[d])
-            {
-              this.myarray[a][d]=temp[l].data.d.usage;
-              break;
-            }
-          }
+          console.log(dbTStamp);
+          // var time=dbTStamp.getTime();
+          // console.log(time);
+          // var time1=dbTStamp.getTimezoneOffset();
+          // console.log(time1);
+          // var dbDate=dbTStamp.getUTCDate();
+
+          var hour=dbTStamp.getHours();
+          var min=dbTStamp.getMinutes();
+          var sec=dbTStamp.getSeconds();
+
+          var time=hour+":"+min+":"+sec;
+          console.log(time);
+          // for(let d=0;d<this.date.length;d++)
+          // {
+          //   if(dbDate==this.date[d])
+          //   {
+          //     this.myarray[a][d]=temp[l].data.d.usage;
+          //     break;
+          //   }
+          // }
         }
-        console.log(this.myarray[a]);
+        // console.log(this.myarray[a]);
         this.chartData2.push({data:this.myarray[a],label:this.selectedAreaItems[a]}); 
        this.status++;
        console.log(this.selectedAreaItems.length);
@@ -153,8 +167,6 @@ export class GraphComponent implements OnInit {
     
   
   }
-
-  
   
       // console.log("chartData"+JSON.stringify(this.chartData2, undefined ,2));
   

@@ -9,7 +9,9 @@ var confirm = require('../admin_calls/confirmUserReq');
 //var del=require('./admin_calls/delRegDev');
 var getDev = require('../admin_calls/getConfirmedDev');
 var fetchDoc1 = require('../api_calls/fetchWholeDoc');
-var list=require('../admin_calls/connList')
+var list = require('../admin_calls/connList')
+var rev = require('../admin_calls/rev');
+var req = require("request");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -59,8 +61,33 @@ app.post("/confirmReq", function (request, response) {
         //     response.send(id);
         //   }
         // })
-        response.send(data);
-      });
+        rev.getRev(lat, lng, function (data) {
+
+          var options = {
+            method: 'DELETE',
+            url: 'https://722fa7b8-0c41-4d59-ac8c-1c02d25eaef5-bluemix.cloudant.com/connection_request/'+data._id,
+            qs: { rev: data._rev },
+            headers:
+              {
+                'postman-token': 'a84462a0-1404-84c6-2681-a51bcf22bea1',
+                'cache-control': 'no-cache',
+                authorization: 'Basic NzIyZmE3YjgtMGM0MS00ZDU5LWFjOGMtMWMwMmQyNWVhZWY1LWJsdWVtaXg6YjdkZGQyOGJmNzU1ODk1Nzg4NjA3NDU3YmRmMjgyZGJmNzJkY2EzMTg3YzA1ZDIwMTZjYjAzNGU5MDI1MDFhNw==',
+                'content-type': 'application/json'
+              }
+          };
+  
+          req(options, function (error, response, body) {
+            if (error) throw new Error(error);
+  
+            console.log(body);
+          });
+  
+  
+          response.send(data);
+        });
+
+        })
+
     }
   });
 })
